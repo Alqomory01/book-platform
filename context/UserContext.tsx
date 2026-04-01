@@ -1,6 +1,6 @@
 // context/UserContext.tsx
 "use client";
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 export type Role = "STUDENT" | "AUTHOR" | "PRESS" | "BOOKSHOP" | "ADMIN";
 
@@ -25,6 +25,24 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
+   // Load user from localStorage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem("user");
+    if (stored) {
+       setTimeout(() => {
+      setUser(JSON.parse(stored));
+    }, 0);
+    }
+  }, []);
+
+ // Save user to localStorage whenever it changes
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [user]);
   const register = async (email: string, password: string, role: Role): Promise<boolean> => {
     // Save user info (in real app, call API)
     setUser({ email, name: email.split("@")[0], role, image: "/profilegirl.png" });
