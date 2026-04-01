@@ -3,15 +3,17 @@ import Image from "next/image"
 import Link from "next/link"
 import { IoSearch } from "react-icons/io5";
 import { useState,useEffect } from "react";
-import { useSession,signOut } from "next-auth/react";
+import {signOut } from "next-auth/react";
 import { FiShoppingCart } from "react-icons/fi";
 import { GrFavorite } from "react-icons/gr";
+import { useUser } from "../context/UserContext";
 
 export default function GuestHeader (){
      const [isSticky, setIsSticky] = useState(false);
      const [menuOpen, setMenuOpen] = useState(false);
-     const { data: session } = useSession();
-  const user = session?.user;
+     const { user, logout } = useUser(); // 👈 get user + logout from context
+    //  const { data: session } = useSession();
+  // const user = session?.user;
 
      
   useEffect(() => {
@@ -92,7 +94,7 @@ return(
               </div>
             </div>
             <button
-              onClick={() => signOut({ callbackUrl: "/" })}
+              onClick={logout}
               className="px-3 py-2 bg-red-500 text-white rounded text-sm"
             >
               Logout

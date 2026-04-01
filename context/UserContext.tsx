@@ -1,13 +1,14 @@
+// context/UserContext.tsx
 "use client";
-
 import { createContext, useContext, useState, ReactNode } from "react";
 
-export type Role = "GUEST" | "STUDENT" | "AUTHOR" | "PRESS" | "BOOKSHOP" | "ADMIN";
+export type Role = "STUDENT" | "AUTHOR" | "PRESS" | "BOOKSHOP" | "ADMIN";
 
 interface User {
   email: string;
   name: string;
   role: Role;
+  image?: string;
 }
 
 interface UserContextType {
@@ -23,20 +24,21 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
   const register = async (email: string, password: string, role: Role): Promise<boolean> => {
-    // Dummy registration: just set user
-    setUser({ email, name: email.split("@")[0], role });
+    // Save user info (in real app, call API)
+    setUser({ email, name: email.split("@")[0], role, image: "/profilegirl.png" });
     return true;
   };
 
   const login = async (email: string, password: string): Promise<boolean> => {
-    // Dummy login: assign role based on email prefix
-    if (email.startsWith("author")) setUser({ email, name: "Author User", role: "AUTHOR" });
-    else if (email.startsWith("press")) setUser({ email, name: "Press User", role: "PRESS" });
-    else if (email.startsWith("shop")) setUser({ email, name: "Bookshop User", role: "BOOKSHOP" });
-    else if (email.startsWith("admin")) setUser({ email, name: "Admin User", role: "ADMIN" });
-    else setUser({ email, name: "Student User", role: "STUDENT" });
+    // In real app, validate credentials against backend
+    // For now, just restore user with role based on email prefix or stored data
+    if (email.startsWith("author")) setUser({ email, name: email.split("@")[0], role: "AUTHOR" });
+    else if (email.startsWith("press")) setUser({ email, name: email.split("@")[0], role: "PRESS" });
+    else if (email.startsWith("shop")) setUser({ email, name: email.split("@")[0], role: "BOOKSHOP" });
+    else if (email.startsWith("admin")) setUser({ email, name: email.split("@")[0], role: "ADMIN" });
+    else setUser({ email, name: email.split("@")[0], role: "STUDENT" });
 
-    return true; // ✅ now returns a boolean
+    return true;
   };
 
   const logout = () => setUser(null);

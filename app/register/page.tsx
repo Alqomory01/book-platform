@@ -8,7 +8,8 @@ import { useRouter } from "next/navigation";
 export default function RegisterPage() {
   const { register } = useUser();
   const router = useRouter();
-  const [form, setForm] = useState<{ email: string; password: string; role: Role }>({
+  const [form, setForm] = useState<{ name: string; email: string; password: string; role: Role }>({
+    name: "",
     email: "",
     password: "",
     role: "STUDENT",
@@ -50,6 +51,13 @@ export default function RegisterPage() {
             Create Account
           </h3>
           <form onSubmit={handleSubmit} className="grid gap-4">
+             <input
+              type="text"
+              placeholder="Full Name"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              className="border px-3 sm:px-4 py-2 sm:py-3 rounded text-sm sm:text-base"
+            />
             <input
               type="email"
               placeholder="Email"

@@ -2,9 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { useUser } from "../../context/UserContext";
 
 export default function LoginPage() {
   const router = useRouter();
+   const { login } = useUser();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -12,16 +14,11 @@ export default function LoginPage() {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    const result = await signIn("dummy", {
-      redirect: false,
-      email,
-      password,
-    });
-
-    if (!result?.error) {
-      router.push("/dashboard");
+    const success = await login(email, password); // 👈 call your context login
+    if (success) {
+      router.push("/dashboard"); // 👈 go to dashboard
     } else {
-      console.error(result.error);
+      console.error("Login failed");
     }
   };
 

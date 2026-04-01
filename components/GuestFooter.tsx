@@ -2,7 +2,7 @@
 
 export default function GuestFooter() {
   return (
-    <footer className="fixed bottom-0 w-full bg-gray-100 text-center text-sm text-gray-600 py-6 mt-10">
+    <footer className="mt-auto bg-gray-100 text-center text-sm text-gray-600 py-6 mt-10">
       <p>&copy; {new Date().getFullYear()} AvasTech. All rights reserved.</p>
 
       {/* Links */}
