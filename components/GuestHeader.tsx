@@ -137,7 +137,7 @@ return(
           <Link href="/about">About Us</Link>
           <Link href="/pages">Pages</Link>
           <Link href="/shop">Shop</Link>
-          <Link href="/blog">Blog</Link>
+          <Link href="/profile">Profile</Link>
           <Link href="/contact">Contact Us</Link>
         </nav>
         <button className="hidden md:block bg-blue-600 text-white px-4 py-2 rounded">

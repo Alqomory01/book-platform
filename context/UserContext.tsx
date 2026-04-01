@@ -9,6 +9,7 @@ interface User {
   name: string;
   role: Role;
   image?: string;
+  bio?: string;
 }
 
 interface UserContextType {
@@ -16,6 +17,7 @@ interface UserContextType {
   register: (email: string, password: string, role: Role) => Promise<boolean>;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
+  updateUser: (updated: User) => void; 
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -43,8 +45,12 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => setUser(null);
 
+  const updateUser = (updated: User) => {
+  setUser(updated);
+};
+
   return (
-    <UserContext.Provider value={{ user, register, login, logout }}>
+    <UserContext.Provider value={{ user, register, login, logout, updateUser }}>
       {children}
     </UserContext.Provider>
   );
