@@ -149,13 +149,14 @@ return(
       {menuOpen && (
         <div className={`md:hidden bg-white shadow-md px-4 py-4 space-y-2 transform transition-all duration-300 ease-in-out ${
     menuOpen ? "max-h-screen opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-4 overflow-hidden"
-  }`}>
+  }`}>    <nav className="flex flex-col space-y-2">
           <Link href="/">Home</Link>
           <Link href="/about">About Us</Link>
           <Link href="/pages">Pages</Link>
           <Link href="/shop">Shop</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/contact">Contact Us</Link>
+          </nav>
           <button className="bg-blue-600 text-white px-4 py-2 rounded w-full">
             Buy Books
           </button>
