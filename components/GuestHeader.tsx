@@ -147,7 +147,9 @@ return(
 
       {/* Mobile dropdown menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white shadow-md px-4 py-4 space-y-2">
+        <div className={`md:hidden bg-white shadow-md px-4 py-4 space-y-2 transform transition-all duration-300 ease-in-out ${
+    menuOpen ? "max-h-screen opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-4 overflow-hidden"
+  }`}>
           <Link href="/">Home</Link>
           <Link href="/about">About Us</Link>
           <Link href="/pages">Pages</Link>

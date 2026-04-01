@@ -1,8 +1,37 @@
 "use client";
 import Image from "next/image";
 
+const recommended = [
+  {
+    title: "Homie",
+    cover: "/storybookcover.jpg",
+    price: "N25.50",
+  },
+  {
+    title: "Thunder Stunt",
+    cover: "/storybookcover.jpg",
+    price: "N16.70",
+  },
+  {
+    title: "Heavy Lift",
+    cover: "/storybookcover.jpg",
+    price: "N19.25",
+  },
+  {
+    title: "Real Life",
+    cover: "/storybookcover.jpg",
+    price: "N27.30",
+  },
+  {
+    title: "Terrible",
+    cover: "/storybookcover.jpg",
+    price: "N24.89",
+  },
+];
+
 export default function Home() {
   return (
+    <>
     <section
       className="
         relative min-h-screen
@@ -66,5 +95,33 @@ export default function Home() {
         />
       </div>
     </section>
+    <section className="px-4 sm:px-8 py-10 bg-white">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4">Recommended For You</h2>
+      <p className="text-gray-600 mb-8 max-w-2xl">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+
+      {/* Responsive card grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+        {recommended.map((item, idx) => (
+          <div
+            key={idx}
+            className="bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col items-center text-center"
+          >
+            <Image
+              src={item.cover}
+              alt={item.title}
+              width={250}
+              height={200}
+              className="rounded mb-4 object-cover"
+            />
+            <h3 className="text-sm sm:text-base font-semibold">{item.title}</h3>
+            <p className="text-blue-600 font-bold mt-2">{item.price}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+    </>
+    
   );
 }
