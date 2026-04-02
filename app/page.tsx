@@ -34,16 +34,17 @@ export default function Home() {
     <>
     <section
       className="
-        relative min-h-screen
-        bg-gradient-to-r from-blue-900 to-blue-700 text-white
-        px-6 sm:px-10 py-12 sm:py-16
-        flex flex-col lg:flex-row items-center justify-between
-        overflow-hidden
+         relative min-h-screen
+    bg-gradient-to-r from-blue-950 to-blue-800 text-white
+    pattern-dots pattern-white pattern-bg-transparent pattern-size-4
+    px-6 sm:px-10 py-12 sm:py-16
+    flex flex-col lg:flex-row items-center justify-between
+    overflow-hidden
       "
     >
-      {/* Background shapes */}
+      
       <div className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="absolute top-20 left-10 sm:left-20 w-40 sm:w-64 h-40 sm:h-64 bg-blue-800 rounded-full opacity-30 blur-3xl"></div>
+        <div className="absolute top-20 left-10 sm:left-20 w-40 sm:w-64 h-40 sm:h-64 bg-yellow-800 rounded-full opacity-30 blur-3xl"></div>
         <div className="absolute bottom-10 right-10 sm:right-40 w-32 sm:w-48 h-32 sm:h-48 bg-orange-500 rounded-full opacity-20 blur-2xl"></div>
       </div>
 
@@ -65,8 +66,8 @@ export default function Home() {
 
         {/* Pricing */}
         <div className="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-3">
-          <span className="text-xl sm:text-2xl font-bold">$9.5</span>
-          <span className="line-through text-gray-400">$12.0</span>
+          <span className="text-xl sm:text-2xl font-bold">₦9.5</span>
+          <span className="line-through text-gray-400">₦12.0</span>
           <span className="bg-pink-600 text-white text-xs sm:text-sm px-2 py-1 rounded">
             25% OFF
           </span>
@@ -84,16 +85,22 @@ export default function Home() {
       </div>
 
       {/* Right Image */}
-      <div className="relative z-10 mt-10 lg:mt-0 w-full max-w-xs sm:max-w-sm lg:max-w-md">
-        <Image
-          src="/profilegirl.png"
-          width={500}
-          height={500}
-          alt="profile girl"
-          priority
-          className="w-full h-auto rounded-lg shadow-lg"
-        />
-      </div>
+    <div className="relative flex items-center justify-center lg:justify-end mt-10 lg:mt-0 w-full max-w-xl">
+  {/* Circle background */}
+  <div className="absolute inset-0 flex items-center justify-center">
+    <div className="bg-blue-950 rounded-full w-72 h-72 sm:w-96 sm:h-96"></div>
+  </div>
+
+  {/* Image overlapping the circle */}
+  <Image
+    src="/avasgirl.png"
+    width={800}
+    height={800}
+    alt="profile girl"
+    priority
+    className="relative top-20 z-10 w-full h-auto object-contain -mt-12"
+  />
+</div>
     </section>
     <section className="px-4 sm:px-8 py-10 bg-white">
       <h2 className="text-2xl sm:text-3xl font-bold mb-4">Recommended For You</h2>
@@ -101,7 +108,7 @@ export default function Home() {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </p>
 
-      {/* Responsive card grid */}
+    
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
         {recommended.map((item, idx) => (
           <div
