@@ -5,6 +5,7 @@ import GuestFooter from "@/components/GuestFooter";
 import { Montserrat, Lora } from 'next/font/google';
 import { UserProvider } from "../context/UserContext";
 import Providers from "../components/Providers";
+// import KeycloakProvider from "../context/KeycloakProvider"
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -38,9 +39,11 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <Providers>
           <UserProvider>
+            {/* <KeycloakProvider> */}
         <GuestHeader/>
         {children}
         <GuestFooter/>
+        {/* </KeycloakProvider> */}
         </UserProvider>
         </Providers>
         </body>

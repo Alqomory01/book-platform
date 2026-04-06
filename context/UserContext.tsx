@@ -1,23 +1,20 @@
-// context/UserContext.tsx
 "use client";
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import keycloak from "../lib/keycloak";
 
 export type Role = "STUDENT" | "AUTHOR" | "PRESS" | "BOOKSHOP" | "ADMIN";
 
 interface User {
-  email: string;
-  name: string;
-  role: Role;
+  email?: string;
+  name?: string;
+  role?: Role;
   image?: string;
-  bio?: string;
 }
 
 interface UserContextType {
   user: User | null;
-  register: (email: string, password: string, role: Role) => Promise<boolean>;
-  login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
-  updateUser: (updated: User) => void; 
+  updateUser: (updated: User) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -25,50 +22,38 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
-   // Load user from localStorage on mount
   useEffect(() => {
-    const stored = localStorage.getItem("user");
-    if (stored) {
-       setTimeout(() => {
-      setUser(JSON.parse(stored));
-    }, 0);
-    }
+    keycloak.init({ onLoad: "check-sso" }).then(auth => {
+      if (auth) {
+        const profile = keycloak.tokenParsed;
+        const roles: string[] = profile?.realm_access?.roles || [];
+
+        // Map Keycloak roles to your app roles
+        let mappedRole: Role = "STUDENT";
+        if (roles.includes("AUTHOR")) mappedRole = "AUTHOR";
+        else if (roles.includes("PRESS")) mappedRole = "PRESS";
+        else if (roles.includes("BOOKSHOP")) mappedRole = "BOOKSHOP";
+        else if (roles.includes("ADMIN")) mappedRole = "ADMIN";
+
+        setUser({
+          email: profile?.email,
+          name: profile?.name || profile?.preferred_username,
+          role: mappedRole,
+          image: "/profilegirl.png", // fallback
+        });
+      }
+    });
   }, []);
 
- // Save user to localStorage whenever it changes
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem("user", JSON.stringify(user));
-    } else {
-      localStorage.removeItem("user");
-    }
-  }, [user]);
-  const register = async (email: string, password: string, role: Role): Promise<boolean> => {
-    // Save user info (in real app, call API)
-    setUser({ email, name: email.split("@")[0], role, image: "/profilegirl.png" });
-    return true;
+  const logout = () => {
+    keycloak.logout({ redirectUri: "http://localhost:3000/login" });
+    setUser(null);
   };
 
-  const login = async (email: string, password: string): Promise<boolean> => {
-    // In real app, validate credentials against backend
-    // For now, just restore user with role based on email prefix or stored data
-    if (email.startsWith("author")) setUser({ email, name: email.split("@")[0], role: "AUTHOR" });
-    else if (email.startsWith("press")) setUser({ email, name: email.split("@")[0], role: "PRESS" });
-    else if (email.startsWith("shop")) setUser({ email, name: email.split("@")[0], role: "BOOKSHOP" });
-    else if (email.startsWith("admin")) setUser({ email, name: email.split("@")[0], role: "ADMIN" });
-    else setUser({ email, name: email.split("@")[0], role: "STUDENT" });
-
-    return true;
-  };
-
-  const logout = () => setUser(null);
-
-  const updateUser = (updated: User) => {
-  setUser(updated);
-};
+  const updateUser = (updated: User) => setUser(updated);
 
   return (
-    <UserContext.Provider value={{ user, register, login, logout, updateUser }}>
+    <UserContext.Provider value={{ user, logout, updateUser }}>
       {children}
     </UserContext.Provider>
   );

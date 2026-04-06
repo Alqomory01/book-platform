@@ -4,21 +4,27 @@ import { useState } from "react";
 import { useUser } from "../../context/UserContext";
 import type { Role } from "../../context/UserContext";
 import { useRouter } from "next/navigation";
+import keycloak from "../../lib/keycloak";
 
 export default function RegisterPage() {
-  const { register } = useUser();
-  const router = useRouter();
-  const [form, setForm] = useState<{ name: string; email: string; password: string; role: Role }>({
-    name: "",
-    email: "",
-    password: "",
-    role: "STUDENT",
-  });
+  // const { register } = useUser();
+  // const router = useRouter();
+  // const [form, setForm] = useState<{ name: string; email: string; password: string; role: Role }>({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  //   role: "STUDENT",
+  // });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    register(form.email, form.password, form.role);
-    router.push("/login");
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   register(form.email, form.password, form.role);
+  //   router.push("/login");
+  // };
+   const handleRegister = () => {
+    keycloak.register(
+      {redirectUri : "http://localhost:3000/dashboard",}
+    ); // Redirects to Keycloak's hosted registration page
   };
 
   return (
@@ -50,8 +56,8 @@ export default function RegisterPage() {
           <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center lg:text-left">
             Create Account
           </h3>
-          <form onSubmit={handleSubmit} className="grid gap-4">
-             <input
+          {/* <form onSubmit={handleSubmit} className="grid gap-4"> */}
+             {/* <input
               type="text"
               placeholder="Full Name"
               value={form.name}
@@ -76,14 +82,15 @@ export default function RegisterPage() {
               value={form.role}
               onChange={(e) => setForm({ ...form, role: e.target.value as Role })}
               className="border px-3 sm:px-4 py-2 sm:py-3 rounded text-sm sm:text-base"
-            >
+            > */}
               <option value="STUDENT">Student</option>
               <option value="AUTHOR">Author</option>
               <option value="PRESS">Press</option>
               <option value="BOOKSHOP">Bookshop</option>
               <option value="ADMIN">Admin</option>
-            </select>
+            {/* </select> */}
             <button
+            onClick={handleRegister}
               className="
                 bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded
                 font-semibold hover:bg-blue-700 text-sm sm:text-base
@@ -91,7 +98,7 @@ export default function RegisterPage() {
             >
               Get Started
             </button>
-          </form>
+          {/* </form> */}
           <p className="mt-4 text-xs sm:text-sm text-gray-500 text-center lg:text-left">
             By clicking Create Account, you agree to our{" "}
             <a href="/privacy" className="underline">

@@ -1,27 +1,17 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
-import { useUser } from "../../context/UserContext";
+// import { useRouter } from "next/navigation";
+import keycloak from '../../lib/keycloak';
+// import { useUser } from "../../context/UserContext";
 
 export default function LoginPage() {
-  const router = useRouter();
-   const { login } = useUser();
+  
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-
-    const success = await login(email, password); // 👈 call your context login
-    if (success) {
-      router.push("/dashboard"); // 👈 go to dashboard
-    } else {
-      console.error("Login failed");
-    }
+ const handleLogin = () => {
+    keycloak.login({
+      redirectUri: "http://localhost:3000/dashboard",
+    }); 
   };
-
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-900 to-blue-400 px-4 sm:px-6 py-8">
       <div
@@ -51,21 +41,11 @@ export default function LoginPage() {
           <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center lg:text-left">
             Login
           </h3>
-          <form onSubmit={handleSubmit} className="grid gap-4">
-            <input
-              name="email"
-              type="email"
-              placeholder="Email"
-              className="border px-3 sm:px-4 py-2 sm:py-3 rounded text-sm sm:text-base"
-            />
-            <input
-              name="password"
-              type="password"
-              placeholder="Password"
-              className="border px-3 sm:px-4 py-2 sm:py-3 rounded text-sm sm:text-base"
-            />
+          
+            
             <button
               type="submit"
+               onClick={handleLogin}
               className="
                 bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded
                 font-semibold hover:bg-blue-700 text-sm sm:text-base
@@ -73,7 +53,7 @@ export default function LoginPage() {
             >
               Sign In
             </button>
-          </form>
+       
           <p className="mt-4 text-xs sm:text-sm text-gray-500 text-center lg:text-left">
             Need help?{" "}
             <a href="/contact" className="underline">
