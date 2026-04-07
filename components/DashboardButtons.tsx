@@ -26,30 +26,30 @@ export default function DashboardButtons() {
         xl:grid-cols-4
       "
     >
-      {canPerform(role, "browseBooks") && (
-        <button className="btn w-full">Browse Books</button>
-      )}
-      {canPerform(role, "purchaseBook") && (
+      {role && canPerform(role, "browseBooks") && (
+  <button className="btn w-full">Browse Books</button>
+)}
+      {role && canPerform(role, "purchaseBook") && (
         <button className="btn w-full">Purchase Book</button>
       )}
-      {canPerform(role, "reserveTitle") && (
+      {role && canPerform(role, "reserveTitle") && (
         <button className="btn w-full">Reserve Title</button>
       )}
-      {canPerform(role, "confirmTitle") && (
+      {role && canPerform(role, "confirmTitle") && (
         <button className="btn w-full">Confirm Title</button>
       )}
-      {canPerform(role, "modifyPrice") && (
+      {role && canPerform(role, "modifyPrice") && (
         <button className="btn w-full">Modify Price</button>
       )}
-      {canPerform(role, "publishBook") && (
+      {role && canPerform(role, "publishBook") && (
         <button className="btn w-full">Publish Book</button>
       )}
-      {canPerform(role, "viewReports") && (
-        <button className="btn w-full">
-          {role === "AUTHOR" ? "View Reports (Limited)" : "View Reports"}
-        </button>
-      )}
-      {canPerform(role, "manageUsers") && (
+      {role !== undefined && canPerform(role, "viewReports") && (
+  <button className="btn w-full">
+    {role === "AUTHOR" ? "View Reports (Limited)" : "View Reports"}
+  </button>
+)}
+      {role && canPerform(role, "manageUsers") && (
         <button className="btn w-full">Manage Users</button>
       )}
     </div>
