@@ -42,7 +42,7 @@ return(
             className="w-auto h-10 sm:h-12"
           />
           <div className="hidden sm:block">
-            <h1 className="text-xl font-bold text-blue-600">Avastech</h1>
+            <h1 className="text-xl font-bold text-blue-600">Top Reader</h1>
             <p className="text-xs text-gray-500">Book Store Website</p>
           </div>
         </div>
@@ -110,7 +110,7 @@ return(
             </Link>
             <Link
               href="/register"
-              className="px-3 py-2 border rounded-xl border-blue text-white bg-blue-600 text-sm"
+              className="px-3 py-2 border rounded-xl border-blue text-white bg-blue-900 text-sm"
             >
               Get Started
             </Link>
@@ -140,7 +140,7 @@ return(
           <Link href="/profile">Profile</Link>
           <Link href="/contact">Contact Us</Link>
         </nav>
-        <button className="hidden md:block bg-blue-600 text-white px-4 py-2 rounded">
+        <button className="hidden md:block bg-blue-900 text-white px-4 py-2 rounded">
           Buy Books
         </button>
       </div>
@@ -157,7 +157,7 @@ return(
           <Link href="/blog">Blog</Link>
           <Link href="/contact">Contact Us</Link>
           </nav>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded w-full">
+          <button className="bg-blue-900 text-white px-4 py-2 rounded w-full">
             Buy Books
           </button>
         </div>

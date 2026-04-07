@@ -9,7 +9,7 @@ export default function LoginPage() {
 
  const handleLogin = () => {
     keycloak.login({
-      redirectUri: "http://localhost:3000/dashboard",
+      redirectUri: "http://localhost:3000/admin",
     }); 
   };
   return (
