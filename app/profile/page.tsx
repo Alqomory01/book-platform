@@ -2,6 +2,13 @@
 import { useUser } from "../../context/UserContext";
 import { useState } from "react";
 import Image from "next/image";
+
+   interface UserUpdate {
+  name: string;
+  bio?: string;
+  image?: string;
+}
+
 export default function Profile(){
      const { user, updateUser } = useUser();
      const [preview, setPreview] = useState<string | null>(user?.image || null);
@@ -10,6 +17,7 @@ export default function Profile(){
     return <p>Please login to view your profile.</p>;
   }
 
+  
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -18,7 +26,7 @@ export default function Profile(){
       name: formData.get("name") as string,
       bio: formData.get("bio") as string,
       image: preview || user.image,
-    });
+    } as UserUpdate);
   };
    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

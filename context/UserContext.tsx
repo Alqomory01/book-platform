@@ -9,6 +9,7 @@ interface User {
   name?: string;
   role?: Role;
   image?: string;
+  bio?: string; 
 }
 
 interface UserContextType {
