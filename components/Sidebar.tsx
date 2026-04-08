@@ -25,7 +25,7 @@ const links = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(true); // expanded by default
+  const [open, setOpen] = useState(false); //closed by default on mobile
 
   return (
     <>
@@ -37,10 +37,18 @@ export default function Sidebar() {
         {open ? "Close Menu" : "Open Menu"}
       </button>
 
+       {/* Overlay for mobile when sidebar is open */}
+      {open && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-40 z-40 md:hidden"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
       <aside
-        className={`fixed md:static top-0 left-0 min-h-screen bg-blue-900 text-white flex flex-col transition-all duration-300 
-        ${open ? "w-64" : "w-20"}`}
+        className={`fixed md:static top-0 left-0 h-full bg-blue-900 text-white flex flex-col transition-transform duration-300 z-50
+        ${open ? "translate-x-0 w-64" : "-translate-x-full md:w-64"}`}
       >
         {/* Logo / Title */}
         <div className="p-4 text-xl font-bold border-b border-blue-700">
@@ -67,16 +75,18 @@ export default function Sidebar() {
             ? "bg-blue-700 font-semibold"
             : "hover:bg-blue-700"
         }`}
+        onClick={() => setOpen(false)}
       >
         <Icon className="h-6 w-6" />
-        {open && <span>{label}</span>}
+         <span className="hidden md:inline">{label}</span>
+        {open && <span className="md:hidden">{label}</span>}
       </Link>
     </li>
   ))}
 </ul>
         </nav>
 
-        {/* Collapse/Expand button (desktop only) */}
+     
         
       </aside>
     </>
