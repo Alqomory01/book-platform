@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link"
 import RevenueForm from "../../components/components/RevenueForm";
 import {
   AcademicCapIcon,
@@ -73,14 +73,10 @@ export default function AdminPage() {
           </div>
         </div>
       </section>
-      {/* Financial Sharing Formula */}
-      <section className="bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-xl font-semibold mb-4">Financial Sharing Formula</h2>
-        <RevenueForm />
-      </section>
 
-      {/* Row 3: Reporting and Gallery Management */}
+       {/* Row 3: Reporting and Gallery Management */}
       <section>
+        <h2 className="text-xl font-semibold mb-4">Reports and Gallery Management</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white shadow-md rounded-lg p-6 flex items-start gap-3">
             <ChartBarIcon className="h-8 w-8 text-blue-900" />
@@ -89,6 +85,9 @@ export default function AdminPage() {
               <p className="text-gray-700">
                 Generate reports for Bookshop, Authors, Press, Gallery Manager, Students, and Auditors.
               </p>
+              <Link href="/report">
+              Check Report →
+              </Link>
               {/* Add table or chart here */}
             </div>
           </div>
@@ -100,10 +99,20 @@ export default function AdminPage() {
               <p className="text-gray-700">
                 Upload, organize, and manage book assets for the university community.
               </p>
+              <Link href="/gallerymanagement">
+              Go to Gallery → </Link>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Financial Sharing Formula */}
+      <section className="bg-white shadow-md rounded-lg p-6">
+        <h2 className="text-xl font-semibold mb-4">Financial Sharing Formula</h2>
+        <RevenueForm />
+      </section>
+
+     
     </div>
   );
 }

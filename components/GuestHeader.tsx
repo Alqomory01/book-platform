@@ -48,21 +48,23 @@ return(
         </div>
 
         {/* Search (hidden on mobile) */}
-        <div className="hidden md:flex items-center bg-gray-700 rounded overflow-hidden w-full max-w-xl shadow">
-          <select className="bg-gray-300 text-gray-700 px-3 py-2 text-sm outline-none border-r">
+        <div className="hidden md:flex items-center  ml-3 rounded-xl overflow-hidden w-full max-w-xl h-12 shadow">
+          <select className="bg-gray-400 text-gray-200  px-3 w-[30%] h-12    text-sm outline-none  border-none">
             <option>Category</option>
             <option>Fiction</option>
             <option>Non-Fiction</option>
             <option>Science</option>
           </select>
+          <div className="bg-gray-700 w-[70%] flex h-12 justify-between items-center ">
           <input
             type="text"
             placeholder="Search Books Here"
-            className="flex-1 px-3 py-2 text-sm text-white outline-none border-none"
+            className="flex-1 px-2  text-sm text-white outline-none border-none"
           />
           <button className="px-3 flex items-center justify-center">
-            <IoSearch className="text-white" />
+            <IoSearch className="text-white w-6 h-6" />
           </button>
+          </div>
         </div>
 
         {/* Right side */}
@@ -95,7 +97,7 @@ return(
             </div>
             <button
               onClick={logout}
-              className="px-3 py-2 bg-red-500 text-white rounded text-sm"
+              className="px-4 py-3 bg-red-500 text-white rounded text-sm"
             >
               Logout
             </button>
@@ -104,13 +106,13 @@ return(
           <div className="flex space-x-2">
             <Link
               href="/login"
-              className="px-3 py-2 border rounded-xl border-blue text-blue-600 text-sm"
+              className="px-4 py-3  border rounded border-blue text-blue-600 text-sm"
             >
               Login
             </Link>
             <Link
               href="/register"
-              className="px-3 py-2 border rounded-xl border-blue text-white bg-blue-900 text-sm"
+              className="px-4 py-3 border rounded border-blue text-white bg-blue-900 text-sm"
             >
               Get Started
             </Link>
