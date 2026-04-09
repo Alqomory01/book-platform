@@ -1,16 +1,14 @@
 "use client";
 
-// import { useRouter } from "next/navigation";
-import keycloak from '../../lib/keycloak';
-// import { useUser } from "../../context/UserContext";
+
+import keycloak from "../../../lib/keycloak";
+
 
 export default function LoginPage() {
-  
-
- const handleLogin = () => {
+  const handleLogin = () => {
     keycloak.login({
       redirectUri: "http://localhost:3000/admin",
-    }); 
+    });
   };
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-900 to-blue-400 px-4 sm:px-6 py-8">
@@ -41,19 +39,18 @@ export default function LoginPage() {
           <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center lg:text-left">
             Login
           </h3>
-          
-            
-            <button
-              type="submit"
-               onClick={handleLogin}
-              className="
+
+          <button
+            type="submit"
+            onClick={handleLogin}
+            className="
                 bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded
                 font-semibold hover:bg-blue-700 text-sm sm:text-base
               "
-            >
-              Sign In
-            </button>
-       
+          >
+            Sign In
+          </button>
+
           <p className="mt-4 text-xs sm:text-sm text-gray-500 text-center lg:text-left">
             Need help?{" "}
             <a href="/contact" className="underline">

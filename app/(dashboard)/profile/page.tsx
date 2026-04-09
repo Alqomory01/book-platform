@@ -1,23 +1,22 @@
-"use client"
-import { useUser } from "../../context/UserContext";
+"use client";
+import { useUser } from "../../../context/UserContext";
 import { useState } from "react";
 import Image from "next/image";
 
-   interface UserUpdate {
+interface UserUpdate {
   name: string;
   bio?: string;
   image?: string;
 }
 
-export default function Profile(){
-     const { user, updateUser } = useUser();
-     const [preview, setPreview] = useState<string | null>(user?.image || null);
+export default function Profile() {
+  const { user, updateUser } = useUser();
+  const [preview, setPreview] = useState<string | null>(user?.image || null);
 
   if (!user) {
     return <p>Please login to view your profile.</p>;
   }
 
-  
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -28,15 +27,15 @@ export default function Profile(){
       image: preview || user.image,
     } as UserUpdate);
   };
-   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const url = URL.createObjectURL(file);
       setPreview(url);
     }
-   }
-    return (
-        <main className="px-4 sm:px-8 py-10">
+  };
+  return (
+    <main className="px-4 sm:px-8 py-10">
       <h1 className="text-2xl font-bold mb-6">My Profile</h1>
       <form onSubmit={handleSave} className="grid gap-4 max-w-md">
         {preview && (
@@ -48,7 +47,7 @@ export default function Profile(){
             className="rounded-full object-cover"
           />
         )}
-         {/* Upload field */}
+        {/* Upload field */}
         <input
           type="file"
           accept="image/*"
@@ -72,5 +71,5 @@ export default function Profile(){
         </button>
       </form>
     </main>
-    )
+  );
 }

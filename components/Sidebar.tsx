@@ -26,6 +26,7 @@ const links = [
 export default function Sidebar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false); //closed by default on mobile
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
     <>
@@ -45,21 +46,28 @@ export default function Sidebar() {
         />
       )}
 
+
+  
+
       {/* Sidebar */}
       <aside
-        className={`fixed md:static top-0 left-0 h-full bg-blue-900 text-white flex flex-col transition-transform duration-300 z-50
-        ${open ? "translate-x-0 w-64" : "-translate-x-full md:w-64"}`}
+         className={`bg-blue-900 text-white flex flex-col transition-all duration-300 
+  w-64 ${collapsed ? "md:w-20" : "md:w-64"}
+fixed top-0 left-0 h-screen z-50
+   ${open ? "translate-x-0" : "-translate-x-full"}
+  md:static md:translate-x-0 md:h-auto md:z-auto
+`}
       >
         {/* Logo / Title */}
         <div className="p-4 text-xl font-bold border-b border-blue-700">
-          {open ? "University Portal" : "UP"}
+          {collapsed ? "UP" : "University Portal"}
         </div>
 
-        <button
+         <button
           className="hidden md:block p-2 bg-blue-800 hover:bg-blue-700"
-          onClick={() => setOpen(!open)}
+          onClick={() => setCollapsed(!collapsed)}
         >
-          {open ? "< Collapse" : "> Expand"}
+          {collapsed ? "> Expand" : "< Collapse"}
         </button>
 
         {/* Navigation */}
@@ -78,8 +86,8 @@ export default function Sidebar() {
         onClick={() => setOpen(false)}
       >
         <Icon className="h-6 w-6" />
-         <span className="hidden md:inline">{label}</span>
-        {open && <span className="md:hidden">{label}</span>}
+         {!collapsed && <span className="hidden md:inline">{label}</span>}
+         {open && <span className="md:hidden">{label}</span>}
       </Link>
     </li>
   ))}

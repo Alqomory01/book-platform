@@ -3,17 +3,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { IoSearch } from "react-icons/io5";
 import { useState,useEffect } from "react";
-import {signOut } from "next-auth/react";
-import { FiShoppingCart } from "react-icons/fi";
-import { GrFavorite } from "react-icons/gr";
-import { useUser } from "../context/UserContext";
+
 
 export default function GuestHeader (){
      const [isSticky, setIsSticky] = useState(false);
      const [menuOpen, setMenuOpen] = useState(false);
-     const { user, logout } = useUser(); // 👈 get user + logout from context
-    //  const { data: session } = useSession();
-  // const user = session?.user;
+    
 
      
   useEffect(() => {
@@ -67,57 +62,15 @@ return(
           </div>
         </div>
 
-        {/* Right side */}
-        {user ? (
-          <div className="flex items-center gap-4">
-            <button className="relative">
-              <GrFavorite />
-              <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full px-1">
-                21
-              </span>
-            </button>
-            <button className="relative">
-              <FiShoppingCart />
-              <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full px-1">
-                5
-              </span>
-            </button>
-            <div className="hidden sm:flex items-center gap-2">
-              <Image
-                src={user.image || "/profilegirl.png"}
-                width={32}
-                height={32}
-                alt="Profile"
-                className="h-8 w-8 rounded-full"
-              />
-              <div className="hidden md:block">
-                <p className="text-sm font-semibold">{user.name}</p>
-                <p className="text-xs text-gray-500">{user.email}</p>
-              </div>
-            </div>
-            <button
-              onClick={logout}
-              className="px-4 py-3 bg-red-500 text-white rounded text-sm"
-            >
-              Logout
-            </button>
-          </div>
-        ) : (
-          <div className="flex space-x-2">
-            <Link
-              href="/login"
-              className="px-4 py-3  border rounded border-blue text-blue-600 text-sm"
-            >
-              Login
-            </Link>
-            <Link
-              href="/register"
-              className="px-4 py-3 border rounded border-blue text-white bg-blue-900 text-sm"
-            >
-              Get Started
-            </Link>
-          </div>
-        )}
+       {/* Guest actions */}
+        <div className="flex space-x-2">
+          <Link href="/login" className="px-4 py-3 border rounded border-blue text-blue-600 text-sm">
+            Login
+          </Link>
+          <Link href="/register" className="px-4 py-3 border rounded border-blue text-white bg-blue-900 text-sm">
+            Get Started
+          </Link>
+        </div>
 
         {/* Mobile menu toggle */}
         <button
@@ -137,9 +90,8 @@ return(
         <nav className="hidden md:flex items-center gap-6 text-gray-700 font-medium">
           <Link href="/">Home</Link>
           <Link href="/about">About Us</Link>
-          <Link href="/pages">Pages</Link>
-          <Link href="/shop">Shop</Link>
-          <Link href="/profile">Profile</Link>
+          <Link href="/books">Books</Link>
+          <Link href="/authors">Authors</Link>
           <Link href="/contact">Contact Us</Link>
         </nav>
         <button className="hidden md:block bg-blue-900 text-white px-4 py-2 rounded">
@@ -152,11 +104,10 @@ return(
         <div className={`md:hidden bg-white shadow-md px-4 py-4 space-y-2 transform transition-all duration-300 ease-in-out ${
     menuOpen ? "max-h-screen opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-4 overflow-hidden"
   }`}>    <nav className="flex flex-col space-y-2">
-          <Link href="/">Home</Link>
+           <Link href="/">Home</Link>
           <Link href="/about">About Us</Link>
-          <Link href="/pages">Pages</Link>
-          <Link href="/shop">Shop</Link>
-          <Link href="/blog">Blog</Link>
+          <Link href="/books">Books</Link>
+          <Link href="/authors">Authors</Link>
           <Link href="/contact">Contact Us</Link>
           </nav>
           <button className="bg-blue-900 text-white px-4 py-2 rounded w-full">

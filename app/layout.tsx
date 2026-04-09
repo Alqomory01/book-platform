@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import GuestHeader from "@/components/GuestHeader";
-import GuestFooter from "@/components/GuestFooter";
 import { Montserrat, Lora } from 'next/font/google';
-import { UserProvider } from "../context/UserContext";
-import Providers from "../components/Providers";
-import Sidebar from "@/components/Sidebar"
+
+
 // import KeycloakProvider from "../context/KeycloakProvider"
 
 const montserrat = Montserrat({
@@ -37,21 +34,14 @@ export default function RootLayout({
       lang="en"
       className={`${montserrat.className} ${lora.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <Providers>
-          <UserProvider>
+      <body className="min-h-full bg-gray-50">
+        
+          
             {/* <KeycloakProvider> */}
-        <GuestHeader/>
-        <div className="flex flex-1">
-        <Sidebar/>
-        <main className="flex-1 p-6 bg-gray-100">
+        
         {children}
-        </main>
-        </div>
-        <GuestFooter/>
         {/* </KeycloakProvider> */}
-        </UserProvider>
-        </Providers>
+        
         </body>
     </html>
   );
