@@ -1,42 +1,43 @@
 "use client";
-import { useUser } from "../../../context/UserContext";
-import { useState } from "react";
-import Image from "next/image";
+// import { useUser } from "../../../context/UserContext";
+// import { useState } from "react";
+// import Image from "next/image";
 
-interface UserUpdate {
-  name: string;
-  bio?: string;
-  image?: string;
-}
+// interface UserUpdate {
+//   name: string;
+//   bio?: string;
+//   image?: string;
+// }
 
 export default function Profile() {
-  const { user, updateUser } = useUser();
-  const [preview, setPreview] = useState<string | null>(user?.image || null);
+  // const { user, updateUser } = useUser();
+  // const [preview, setPreview] = useState<string | null>(user?.image || null);
 
-  if (!user) {
-    return <p>Please login to view your profile.</p>;
-  }
+  // if (!user) {
+  //   return <p>Please login to view your profile.</p>;
+  // }
 
-  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    updateUser({
-      ...user,
-      name: formData.get("name") as string,
-      bio: formData.get("bio") as string,
-      image: preview || user.image,
-    } as UserUpdate);
-  };
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setPreview(url);
-    }
-  };
+  // const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   const formData = new FormData(e.currentTarget);
+  //   updateUser({
+  //     ...user,
+  //     name: formData.get("name") as string,
+  //     bio: formData.get("bio") as string,
+  //     image: preview || user.image,
+  //   } as UserUpdate);
+  // };
+  // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (file) {
+  //     const url = URL.createObjectURL(file);
+  //     setPreview(url);
+  //   }
+  // };
   return (
-    <main className="px-4 sm:px-8 py-10">
-      <h1 className="text-2xl font-bold mb-6">My Profile</h1>
+    <>
+    {/* <main className="px-4 sm:px-8 py-10"> */}
+      {/* <h1 className="text-2xl font-bold mb-6">My Profile</h1>
       <form onSubmit={handleSave} className="grid gap-4 max-w-md">
         {preview && (
           <Image
@@ -46,9 +47,9 @@ export default function Profile() {
             height={100}
             className="rounded-full object-cover"
           />
-        )}
+        )} */}
         {/* Upload field */}
-        <input
+        {/* <input
           type="file"
           accept="image/*"
           onChange={handleImageChange}
@@ -69,7 +70,9 @@ export default function Profile() {
         <button className="bg-blue-600 text-white px-4 py-2 rounded">
           Save Changes
         </button>
-      </form>
-    </main>
+      </form> */}
+    {/* </main> */}
+    <div><p>profile page</p></div>
+    </>
   );
 }
