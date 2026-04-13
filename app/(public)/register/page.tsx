@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { useUser } from "../../../context/UserContext";
-import type { Role } from "../../../context/UserContext";
-import { useRouter } from "next/navigation";
+// import { useState } from "react";
+// import { useUser } from "../../../context/UserContext";
+// import type { Role } from "../../../context/UserContext";
+// import { useRouter } from "next/navigation";
 import keycloak from "../../../lib/keycloak";
 
 export default function RegisterPage() {
@@ -22,7 +22,7 @@ export default function RegisterPage() {
   //   router.push("/login");
   // };
   const handleRegister = () => {
-    keycloak.register({ redirectUri: "http://localhost:3000/dashboard" }); // Redirects to Keycloak's hosted registration page
+    keycloak.register({ redirectUri: "http://localhost:3000/admin" }); // Redirects to Keycloak's hosted registration page
   };
 
   return (
